@@ -1,0 +1,10 @@
+$kind: http-request
+method: DELETE
+url: '{{base_url}}/book/:book'
+order: 6000
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+pathVariables:
+  - key: book
+    value: '{{book_id}}'

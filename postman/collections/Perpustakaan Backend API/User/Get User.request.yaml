@@ -1,0 +1,10 @@
+$kind: http-request
+method: GET
+url: '{{base_url}}/user/:user'
+order: 3000
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+pathVariables:
+  - key: user
+    value: '{{user_id}}'

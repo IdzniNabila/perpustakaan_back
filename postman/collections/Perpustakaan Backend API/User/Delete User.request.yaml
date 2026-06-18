@@ -1,0 +1,10 @@
+$kind: http-request
+method: DELETE
+url: '{{base_url}}/user/:user'
+order: 6000
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+pathVariables:
+  - key: user
+    value: '{{user_id}}'

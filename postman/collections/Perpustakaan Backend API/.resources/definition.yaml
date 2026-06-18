@@ -1,0 +1,18 @@
+$kind: collection
+name: 'Perpustakaan Backend API'
+description: |-
+  Collection generated from the Laravel API implementation in routes/api.php and app/Http/Controllers/Api.
+
+  Public endpoints: authentication login and signup.
+  Protected endpoints require a JWT Bearer token. Run Login first to populate the collection variable `token`.
+variables:
+  - key: base_url
+    value: 'http://127.0.0.1:8000/api'
+  - key: token
+    value: ''
+  - key: book_id
+    value: '1'
+  - key: user_id
+    value: '1'
+  - key: peminjaman_id
+    value: '1'

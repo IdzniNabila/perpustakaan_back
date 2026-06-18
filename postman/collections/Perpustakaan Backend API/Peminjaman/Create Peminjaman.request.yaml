@@ -1,0 +1,18 @@
+$kind: http-request
+method: POST
+url: '{{base_url}}/peminjaman'
+order: 3000
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "book_id": "{{book_id}}",
+      "user_id": "{{user_id}}",
+      "tgl_pinjam": "2026-06-18",
+      "tgl_kembali": "2026-06-25"
+    }

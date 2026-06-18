@@ -1,0 +1,19 @@
+$kind: http-request
+method: POST
+url: '{{base_url}}/book'
+order: 2000
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Belajar Laravel",
+      "description": "Buku pengantar Laravel untuk pemula.",
+      "penerbit": "Penerbit Contoh",
+      "tanggal_terbit": "2026-01-01",
+      "stock": 10
+    }

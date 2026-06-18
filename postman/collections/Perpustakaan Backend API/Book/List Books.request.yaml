@@ -1,0 +1,12 @@
+$kind: http-request
+method: GET
+url: '{{base_url}}/book'
+order: 1000
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+queryParams:
+  - key: search
+    value: ''
+    description: 'Optional search by book name or publisher'
+    disabled: true

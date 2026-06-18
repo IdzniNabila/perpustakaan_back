@@ -1,0 +1,7 @@
+$kind: http-request
+method: POST
+url: '{{base_url}}/auth/logout'
+order: 3000
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'

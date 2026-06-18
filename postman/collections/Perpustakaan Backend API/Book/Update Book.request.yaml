@@ -1,0 +1,22 @@
+$kind: http-request
+method: PUT
+url: '{{base_url}}/book/:book'
+order: 5000
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+  - key: Content-Type
+    value: application/json
+pathVariables:
+  - key: book
+    value: '{{book_id}}'
+body:
+  type: json
+  content: |-
+    {
+      "name": "Belajar Laravel Updated",
+      "description": "Buku pengantar Laravel yang diperbarui.",
+      "penerbit": "Penerbit Contoh",
+      "tanggal_terbit": "2026-01-01",
+      "stock": 12
+    }

@@ -1,0 +1,10 @@
+$kind: http-request
+method: GET
+url: '{{base_url}}/peminjaman/:peminjaman'
+order: 4000
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+pathVariables:
+  - key: peminjaman
+    value: '{{peminjaman_id}}'
