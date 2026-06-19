@@ -1,5 +1,5 @@
 $kind: collection
-name: 'Perpustakaan Backend API'
+name: Perpustakaan Backend API
 description: |-
   Collection generated from the Laravel API implementation in routes/api.php and app/Http/Controllers/Api.
 
@@ -7,12 +7,23 @@ description: |-
   Protected endpoints require a JWT Bearer token. Run Login first to populate the collection variable `token`.
 variables:
   - key: base_url
-    value: 'http://127.0.0.1:8000/api'
+    value: http://127.0.0.1:8000/api
+    secret: false
   - key: token
-    value: ''
+    value: ""
+    secret: false
   - key: book_id
-    value: '1'
+    value: "1"
+    secret: false
   - key: user_id
-    value: '1'
+    value: "1"
+    secret: false
   - key: peminjaman_id
-    value: '1'
+    value: "1"
+    secret: false
+  - key: auth_secret_0qbj
+    secret: true
+  - key: json_web_token_0tk4
+    secret: true
+  - key: auth_secret_0chg
+    secret: true

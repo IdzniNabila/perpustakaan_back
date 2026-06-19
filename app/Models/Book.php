@@ -15,6 +15,7 @@ class Book extends Model
         'penerbit',
         'tanggal_terbit',
         'stock',
+        'image',
     ];
 
     protected function casts(): array

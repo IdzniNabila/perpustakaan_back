@@ -19,6 +19,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->api(prepend: [
             \Illuminate\Http\Middleware\HandleCors::class,
         ]);
+
+        $middleware->alias([
+            'role' => \App\Http\Middleware\CheckRole::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         // Handle error JWT agar response-nya selalu JSON (bukan HTML)
@@ -40,6 +44,12 @@ return Application::configure(basePath: dirname(__DIR__))
             return response()->json([
                 'success' => false,
                 'error'   => ['message' => 'Token not provided'],
+            ], 401);
+        });
+        $exceptions->render(function (\Illuminate\Auth\AuthenticationException $e, Request $request) {
+            return response()->json([
+                'success' => false,
+                'error'   => ['message' => 'Unauthenticated'],
             ], 401);
         });
     })->create();

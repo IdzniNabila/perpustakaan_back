@@ -44,6 +44,7 @@ class BookController extends Controller
             'penerbit'       => ['required', 'string', 'max:191'],
             'tanggal_terbit' => ['required', 'date'],
             'stock'          => ['required', 'integer', 'min:0'],
+            'image'          => ['nullable', 'string'],
         ]);
 
         $book = Book::create($data);
@@ -88,6 +89,7 @@ class BookController extends Controller
             'penerbit'       => ['required', 'string', 'max:191'],
             'tanggal_terbit' => ['required', 'date'],
             'stock'          => ['required', 'integer', 'min:0'],
+            'image'          => ['nullable', 'string'],
         ]);
 
         $book->update($data);

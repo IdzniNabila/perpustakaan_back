@@ -1,0 +1,8 @@
+$kind: collection
+name: Peminjaman
+auth:
+  - id: a533742a-fe6b-4755-b309-3ad7ff8b7f37
+    type: bearer
+    name: Bearer Token
+    credentials:
+      token: "{{auth_secret_0chg}}"

@@ -1,0 +1,8 @@
+$kind: collection
+name: Book
+auth:
+  - id: 062ec716-16de-47c3-b338-35d02ad9171b
+    type: bearer
+    name: Bearer Token
+    credentials:
+      token: "{{auth_secret_0qbj}}"

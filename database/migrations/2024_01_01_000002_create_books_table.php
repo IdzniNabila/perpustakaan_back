@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('penerbit');
             $table->date('tanggal_terbit');
             $table->unsignedInteger('stock')->default(1);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
