@@ -7,12 +7,13 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
     /**
-     * Login — bandingkan password plain text, kembalikan JWT token.
+     * Login — bandingkan password hashed, kembalikan JWT token.
      *
      * POST /api/auth/login
      * Body: { email, password }
@@ -27,8 +28,8 @@ class AuthController extends Controller
         // Cari user berdasarkan email
         $user = User::where('email', $request->email)->first();
 
-        // Bandingkan password plain text langsung
-        if (!$user || $user->password !== $request->password) {
+        // Bandingkan password menggunakan Hash::check
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'success' => false,
                 'message' => 'Email atau password salah.',
@@ -81,7 +82,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Register user baru (password disimpan plain text).
+     * Register user baru (password di-hash otomatis oleh model).
      *
      * POST /api/auth/signup
      */
@@ -93,7 +94,7 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:6'],
         ]);
 
-        // Simpan plain text, tidak di-hash
+        // Password di-hash secara otomatis oleh cast 'hashed' pada model User
         $user = User::create($data);
 
         return response()->json([
