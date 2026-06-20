@@ -33,6 +33,21 @@ class Book extends Model
         return $this->hasMany(Peminjaman::class);
     }
 
+    public function kategoris()
+    {
+        return $this->belongsToMany(Kategori::class, 'book_kategori', 'book_id', 'kategori_id');
+    }
+
+    public function ulasans()
+    {
+        return $this->hasMany(Ulasan::class);
+    }
+
+    public function rakBukus()
+    {
+        return $this->hasMany(RakBuku::class);
+    }
+
     // ── Scope ───────────────────────────────────────────────────────────────
 
     /** Filter buku yang masih ada stok */

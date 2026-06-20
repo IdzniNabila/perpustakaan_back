@@ -14,6 +14,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->date('tgl_pinjam');
             $table->date('tgl_kembali');
+            $table->string('status')->default('dipinjam'); // 'dipinjam' atau 'kembali'
+            $table->date('tgl_pengembalian')->nullable();
+            $table->integer('denda')->default(0);
+            $table->integer('diperpanjang_sebanyak')->default(0);
             $table->timestamps();
         });
     }

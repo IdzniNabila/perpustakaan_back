@@ -38,6 +38,16 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Peminjaman::class);
     }
 
+    public function ulasans()
+    {
+        return $this->hasMany(Ulasan::class);
+    }
+
+    public function rakBukus()
+    {
+        return $this->hasMany(RakBuku::class);
+    }
+
     // ── JWT ─────────────────────────────────────────────────────────────────
 
     public function getJWTIdentifier(): mixed

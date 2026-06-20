@@ -13,13 +13,18 @@ class Peminjaman extends Model
         'user_id',
         'tgl_pinjam',
         'tgl_kembali',
+        'status',
+        'tgl_pengembalian',
+        'denda',
     ];
 
     protected function casts(): array
     {
         return [
-            'tgl_pinjam'  => 'date',
-            'tgl_kembali' => 'date',
+            'tgl_pinjam'       => 'date',
+            'tgl_kembali'      => 'date',
+            'tgl_pengembalian' => 'date',
+            'denda'            => 'integer',
         ];
     }
 

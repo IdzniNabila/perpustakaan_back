@@ -104,6 +104,44 @@ class AuthController extends Controller
         ], 201);
     }
 
+    /**
+     * Update profile — perbarui nama, email, dan password user yang sedang login.
+     *
+     * PUT /api/auth/profile
+     */
+    public function updateProfile(Request $request): JsonResponse
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::guard('api')->user();
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User tidak ditemukan atau belum login.',
+            ], 401);
+        }
+
+        $data = $request->validate([
+            'name'     => ['required', 'string', 'max:100'],
+            'email'    => ['required', 'email', "unique:users,email,{$user->id}"],
+            'password' => ['nullable', 'string', 'min:6'],
+        ]);
+
+        if (!empty($data['password'])) {
+            $user->password = $data['password'];
+        }
+
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Profil berhasil diperbarui.',
+            'data'    => $user->only('id', 'name', 'email', 'role'),
+        ]);
+    }
+
     // ── Helper ───────────────────────────────────────────────────────────────
 
     private function respondWithToken(string $token): JsonResponse

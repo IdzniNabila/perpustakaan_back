@@ -27,15 +27,19 @@ class DatabaseSeeder extends Seeder
             'role'     => 'pengunjung',
         ]);
 
-        // 5 Anggota Perpustakaan (Kecuali User admin, password = null)
+        // 5 Anggota Perpustakaan dengan password default agar bisa login
         $members = [
-            ['name' => 'Idzni Nabila',  'email' => 'idzni@gmail.com',   'password' => null, 'role' => 'pengunjung', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Alfaridzi',     'email' => 'alfaridzi@gmail.com','password' => null, 'role' => 'pengunjung', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Budi Santoso',  'email' => 'budi@gmail.com',    'password' => null, 'role' => 'pengunjung', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Siti Aminah',   'email' => 'siti@gmail.com',    'password' => null, 'role' => 'pengunjung', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Rian Hidayat',  'email' => 'rian@gmail.com',    'password' => null, 'role' => 'pengunjung', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Idzni Nabila',  'email' => 'idzni@gmail.com',    'password' => 'password123', 'role' => 'pengunjung'],
+            ['name' => 'Alfaridzi',     'email' => 'alfaridzi@gmail.com', 'password' => 'password123', 'role' => 'pengunjung'],
+            ['name' => 'Budi Santoso',  'email' => 'budi@gmail.com',     'password' => 'password123', 'role' => 'pengunjung'],
+            ['name' => 'Siti Aminah',   'email' => 'siti@gmail.com',     'password' => 'password123', 'role' => 'pengunjung'],
+            ['name' => 'Rian Hidayat',  'email' => 'rian@gmail.com',     'password' => 'password123', 'role' => 'pengunjung'],
         ];
-        User::insert($members);
+
+        foreach ($members as $member) {
+            User::create($member);
+        }
+
 
         // 2. Data Buku (10 records)
         $books = [

@@ -36,14 +36,40 @@ Route::middleware('auth:api')->group(function () {
     Route::get('book', [BookController::class, 'index']);
     Route::get('book/{book}', [BookController::class, 'show']);
 
-    // Peminjaman list can be accessed by anyone authenticated
+    // Peminjaman
     Route::get('peminjaman', [PeminjamanController::class, 'index']);
+    Route::post('peminjaman', [PeminjamanController::class, 'store']); // Bisa dipanggil admin atau pengunjung
+    Route::get('my-history', [PeminjamanController::class, 'myHistory']); // Riwayat peminjaman pengunjung sendiri
+
+    // Perpanjangan peminjaman
+    Route::post('peminjaman/{peminjaman}/extend', [PeminjamanController::class, 'extendBorrowing']);
+
+    // e-Pustaka / Kategori (Read Only for public)
+    Route::get('kategori', [\App\Http\Controllers\Api\KategoriController::class, 'index']);
+    Route::get('kategori/{kategori}', [\App\Http\Controllers\Api\KategoriController::class, 'show']);
+
+    // Ulasan
+    Route::get('book/{book}/ulasan', [\App\Http\Controllers\Api\UlasanController::class, 'index']);
+    Route::post('book/{book}/ulasan', [\App\Http\Controllers\Api\UlasanController::class, 'store']);
+
+    // Rak Buku
+    Route::get('rak-buku', [\App\Http\Controllers\Api\RakBukuController::class, 'index']);
+    Route::post('rak-buku', [\App\Http\Controllers\Api\RakBukuController::class, 'store']);
+    Route::delete('rak-buku/{rakBuku}', [\App\Http\Controllers\Api\RakBukuController::class, 'destroy']);
+
+    // Update Profil Sendiri
+    Route::put('auth/profile', [AuthController::class, 'updateProfile']);
 
     Route::middleware('role:admin')->group(function () {
         Route::get('book/{book}/edit', [BookController::class, 'edit']);
         Route::post('book', [BookController::class, 'store']);
         Route::put('book/{book}', [BookController::class, 'update']);
         Route::delete('book/{book}', [BookController::class, 'destroy']);
+
+        // CRUD Kategori khusus admin
+        Route::post('kategori', [\App\Http\Controllers\Api\KategoriController::class, 'store']);
+        Route::put('kategori/{kategori}', [\App\Http\Controllers\Api\KategoriController::class, 'update']);
+        Route::delete('kategori/{kategori}', [\App\Http\Controllers\Api\KategoriController::class, 'destroy']);
 
         // User / Anggota
         Route::get('user/{user}/edit', [UserController::class, 'edit']);
@@ -52,10 +78,10 @@ Route::middleware('auth:api')->group(function () {
         // Peminjaman (admin-only actions)
         Route::get('peminjaman/create',          [PeminjamanController::class, 'create']);
         Route::get('peminjaman/{peminjaman}/edit', [PeminjamanController::class, 'edit']);
-        Route::post('peminjaman',                [PeminjamanController::class, 'store']);
         Route::get('peminjaman/{peminjaman}',     [PeminjamanController::class, 'show']);
         Route::put('peminjaman/{peminjaman}',     [PeminjamanController::class, 'update']);
-        Route::delete('peminjaman/{peminjaman}',  [PeminjamanController::class, 'destroy']);
+        Route::delete('peminjaman/{peminjaman}',  [PeminjamanController::class, 'destroy']); // DELETE maps to return logic
+        Route::post('peminjaman/{peminjaman}/return', [PeminjamanController::class, 'returnBook']); // Dedicated return route
     });
 });
 
